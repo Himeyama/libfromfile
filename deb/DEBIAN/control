@@ -1,0 +1,8 @@
+Package: libfromfile
+Version: 1.00-1
+Maintainer: Murata Mitsuharu <hikari.photon@gmail.com>
+Section: library
+Priority: optional
+Depends: bash, gcc, make
+Architecture: amd64
+Description: A shared library loaded from a binary data file.
