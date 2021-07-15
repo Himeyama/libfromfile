@@ -4,8 +4,8 @@
 
 ### Ubuntu
 ```sh
-wget <package>.deb
-sudo apt install ./<package>.deb
+wget https://github.com/Himeyama/libfromfile/releases/download/1.0/libfromfile.deb
+sudo apt install ./libfromfile.deb
 ```
 
 ```sh
