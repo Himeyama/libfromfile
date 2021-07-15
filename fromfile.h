@@ -17,5 +17,6 @@ long fsize(FILE* fp);
 DFloat dFloatfromfile(const char* filename);
 void dFloatprint(DFloat data);
 void dFloatfree(DFloat data);
+DFloat dFloatfromfilep(const char* filename, double *p);
 
 #endif

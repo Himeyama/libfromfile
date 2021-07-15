@@ -38,6 +38,22 @@ DFloat dFloatfromfile(const char* filename){
     return data;
 }
 
+DFloat dFloatfromfilep(const char* filename, double *p){
+    FILE* fp;
+    DFloat data;
+    data.data = p;
+    if(fp = fopen(filename, "r")){
+        long filesize;
+        if((filesize = fsize(fp)) == -1) exit(EXIT_FAILURE);
+        data.size = filesize / sizeof(double);
+        long len = fread(data.data, sizeof(double), filesize / sizeof(double), fp);
+        fclose(fp);        
+    }else{
+        exit(EXIT_FAILURE);
+    }
+    return data;
+}
+
 void dFloatprint(DFloat data){
     char* str = (char*)malloc(data.size * 16);
     char tmp[16];
