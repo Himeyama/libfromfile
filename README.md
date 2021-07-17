@@ -20,8 +20,8 @@ typedef struct __DFloat{
 DFloat dFloatFromFile(const char* filename);
 ```
 
-filename: ファイル名
-戻り値: データ
+- filename: ファイル名
+- 戻り値: データ
 
 ### データを書き込む場合(tofile)
 `DFloat` 構造体の `.data` に配列のポインタを設定、配列のサイズを `.size` に設定する。
@@ -30,9 +30,9 @@ filename: ファイル名
 DFloat dFloat2file(const char* filename, DFloat data);
 ```
 
-filename: ファイル名
-data: データ
-戻り値: データ (data と同じ)
+- filename: ファイル名
+- data: データ
+- 戻り値: データ (data と同じ)
 
 ## サンプル
 ```c
