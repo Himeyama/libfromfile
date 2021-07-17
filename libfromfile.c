@@ -6,28 +6,37 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/stat.h>
 #include "fromfile.h"
 
 
 // ファイルサイズを調べる
-long fsize(FILE* fp){
-    fpos_t p, p1, p2;
-    if(fgetpos(fp, &p) ||
-        fseek(fp, 0, SEEK_END) ||
-        fgetpos(fp, &p2) ||
-        fseek(fp, 0, SEEK_SET) ||
-        fgetpos(fp, &p1) ||
-        fsetpos(fp, &p))
+long fsize(const char* filename){
+    struct stat s;
+    if(stat(filename, &s) == 0)
+        return s.st_size;
     return -1;
-    return p2.__pos - p1.__pos;
 }
 
-DFloat dFloatfromfile(const char* filename){
+
+DFloat dFloat2file(const char* filename, DFloat data){
+    FILE* fp;
+    if(fp = fopen(filename, "w")){
+        fwrite(data.data, sizeof(double), data.size, fp);
+        fclose(fp);
+    }else{
+        exit(EXIT_FAILURE);
+    }
+    return data;
+}
+
+
+DFloat dFloatFromFile(const char* filename){
     FILE* fp;
     DFloat data;
     if(fp = fopen(filename, "r")){
         long filesize;
-        if((filesize = fsize(fp)) == -1) exit(EXIT_FAILURE);
+        if((filesize = fsize(filename)) == -1) exit(EXIT_FAILURE);
         data.data = (double*)malloc(filesize);
         data.size = filesize / sizeof(double);
         long len = fread(data.data, sizeof(double), filesize / sizeof(double), fp);
@@ -38,13 +47,13 @@ DFloat dFloatfromfile(const char* filename){
     return data;
 }
 
-DFloat dFloatfromfilep(const char* filename, double *p){
+DFloat dFloatFromFileP(const char* filename, double *p){
     FILE* fp;
     DFloat data;
     data.data = p;
     if(fp = fopen(filename, "r")){
         long filesize;
-        if((filesize = fsize(fp)) == -1) exit(EXIT_FAILURE);
+        if((filesize = fsize(filename)) == -1) exit(EXIT_FAILURE);
         data.size = filesize / sizeof(double);
         long len = fread(data.data, sizeof(double), filesize / sizeof(double), fp);
         fclose(fp);        
@@ -54,7 +63,7 @@ DFloat dFloatfromfilep(const char* filename, double *p){
     return data;
 }
 
-void dFloatprint(DFloat data){
+void dFloatPrint(DFloat data){
     char* str = (char*)malloc(data.size * 16);
     char tmp[16];
     str[0] = '[';
@@ -70,6 +79,6 @@ void dFloatprint(DFloat data){
     free(str);
 }
 
-void dFloatfree(DFloat data){
+void dFloatFree(DFloat data){
     free(data.data);
 }

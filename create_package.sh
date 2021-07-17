@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+rm -rf deb/usr
 mkdir -p deb/usr/include
 mkdir -p deb/usr/lib
 make

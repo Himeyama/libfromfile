@@ -8,6 +8,6 @@ bin="${bin}\x00\x00\x00\x00\x00\x00\x08\x40"
 #     bin="${bin}\x00\x00\x00\x00\x00\x00\xf4\x3f"
 # done
 
-echo -en $bin > test.bin
+echo -en $bin > testDBL.bin
 
-# od -vt fD test.bin
+# od -vt fD testDBL.bin

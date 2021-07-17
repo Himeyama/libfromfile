@@ -13,10 +13,11 @@ typedef struct __DFloat{
     long size;
 } DFloat;
 
-long fsize(FILE* fp);
-DFloat dFloatfromfile(const char* filename);
-void dFloatprint(DFloat data);
-void dFloatfree(DFloat data);
-DFloat dFloatfromfilep(const char* filename, double *p);
+long fsize(const char* filename);
+DFloat dFloatFromFile(const char* filename);
+void dFloatPrint(DFloat data);
+void dFloatFree(DFloat data);
+DFloat dFloat2file(const char* filename, DFloat data);
+DFloat dFloatFromFileP(const char* filename, double *p);
 
 #endif
