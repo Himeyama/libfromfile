@@ -20,7 +20,6 @@ int main(void){
     dFloatPrint(data2);
     dFloatFree(data2);
 
-
     return 0;
 }
 
